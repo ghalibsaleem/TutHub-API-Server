@@ -6,6 +6,14 @@
   <session-factory>
     <property name="connection.url">jdbc:mysql://localhost:3308/tut_hub_server_db</property>
     <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+    <mapping class="entities.Answer"/>
+    <mapping class="entities.Course"/>
+    <mapping class="entities.Question"/>
+    <mapping class="entities.Review"/>
+    <mapping class="entities.Tutor"/>
+    <mapping class="entities.User"/>
+    <mapping class="entities.Video"/>
+
     <!-- DB schema will be updated if needed -->
     <!-- <property name="hbm2ddl.auto">update</property> -->
   </session-factory>
