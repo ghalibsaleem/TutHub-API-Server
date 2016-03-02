@@ -3,6 +3,7 @@ package org.tuthub.api.resources;
 
 
 
+import helper.DatabaseOperation;
 import helper.UserOperation;
 import entities.User;
 
@@ -27,8 +28,10 @@ public class UserResource {
 
     @GET
     public User getUser(@QueryParam("username") String username, @QueryParam("password") String password){
-        UserOperation userOperation = new UserOperation();
-        User user = userOperation.getUser(username,password);
+        //UserOperation userOperation = new UserOperation();
+        //User user = userOperation.getUser(username,password);
+        DatabaseOperation<User> userDatabaseOperation = new DatabaseOperation<User>(User.class);
+        User user = userDatabaseOperation.login(username,password);
         return user;
     }
 
