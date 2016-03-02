@@ -1,6 +1,6 @@
 package org.tuthub.api.resources;
 
-import models.Video;
+import entities.Video;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;

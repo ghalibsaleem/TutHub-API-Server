@@ -1,7 +1,7 @@
 package helper;
 
 
-import models.Tutor;
+import entities.Tutor;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -35,27 +35,7 @@ public class TutorOperations {
     }
 
     public Tutor getTutor(String tutorId, String password) {
-        try {
-            Statement stmt = connection.createStatement();
-            ResultSet rs = null;
-            if (tutorId.contains("@"))
-                rs = stmt.executeQuery("select * from tutors WHERE email=" + tutorId + "AND password=" + password);
-            else
-                rs = stmt.executeQuery("select * from tutors WHERE tutor_id=" + tutorId + "AND password=" + password);
-            if (rs != null && rs.next()) {
-                Tutor tutor = new Tutor();
-                tutor.tutor_id = rs.getString(0);
-                tutor.email = rs.getString(1);
-                tutor.password = rs.getString(2);
-                tutor.name = rs.getString(3);
-                tutor.description = rs.getString(4);
-                tutor.imageURL = rs.getString(5);
-                tutor.address = rs.getString(6);
-                return tutor;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
 
         return null;
     }
@@ -81,14 +61,7 @@ public class TutorOperations {
     }
 
     public boolean insertTutor(Tutor tutor) {
-        String sql = "INSERT INTO tutors VALUES(" + tutor.tutor_id + "," + tutor.email + "," + tutor.password
-                + "," + tutor.name + "," + tutor.description + "," + tutor.imageURL + "," + tutor.address + ")";
-        try {
-            Statement stmt = connection.createStatement();
-            return stmt.execute(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
         return false;
     }
 

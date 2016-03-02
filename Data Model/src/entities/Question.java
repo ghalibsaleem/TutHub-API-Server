@@ -1,6 +1,8 @@
 package entities;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by ghali on 3/2/2016.
@@ -48,6 +50,7 @@ public class Question {
     public String getUsername() {
         return username;
     }
+
 
     public void setUsername(String username) {
         this.username = username;

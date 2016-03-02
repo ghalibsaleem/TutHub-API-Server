@@ -1,6 +1,6 @@
 package org.tuthub.api.resources;
 
-import models.Course;
+import entities.Course;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

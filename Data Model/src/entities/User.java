@@ -1,11 +1,14 @@
 package entities;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.sql.Date;
 
 /**
  * Created by ghali on 3/2/2016.
  */
+@XmlRootElement
 @Entity
 @Table(name = "users", schema = "tut_hub_server_db", catalog = "")
 @IdClass(UserPK.class)
@@ -39,6 +42,7 @@ public class User {
         this.email = email;
     }
 
+    @XmlTransient
     @Basic
     @Column(name = "password")
     public String getPassword() {

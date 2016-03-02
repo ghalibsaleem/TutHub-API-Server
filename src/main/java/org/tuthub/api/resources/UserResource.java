@@ -4,7 +4,7 @@ package org.tuthub.api.resources;
 
 
 import helper.UserOperation;
-import models.User;
+import entities.User;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

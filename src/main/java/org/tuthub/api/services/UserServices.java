@@ -3,7 +3,7 @@ package org.tuthub.api.services;
 
 
 import helper.UserOperation;
-import models.User;
+import entities.User;
 
 /**
  * Created by ghali on 2/24/2016.
