@@ -119,16 +119,21 @@ public class DatabaseOperation<T extends Object> {
         if (Helper.sessionFactory == null)
             Helper.init();
         Session session = Helper.sessionFactory.openSession();
-        Query query = null;
-        // TODO: 3/2/2016
-
+        try{
+            Query query = getQueryForID(id);
+            return (T)query.uniqueResult();
+        }catch (Exception e){
+           e.printStackTrace();
+        }finally {
+            if (session!=null && session.isOpen())
+                session.close();
+        }
         return null;
     }
 
     private Query getQueryForID(String id){
         if (Helper.sessionFactory == null)
             Helper.init();
-        // FIXME: 3/2/2016
         Session session = Helper.sessionFactory.openSession();
         Query query = null;
         if(Answer.class == type){
@@ -138,19 +143,19 @@ public class DatabaseOperation<T extends Object> {
             return session.createQuery("from Course where courseId = "+id);
         }
         if(Question.class == type){
-
+            return session.createQuery("from Question where questionId = "+id);
         }
         if(Review.class == type){
-
+            return session.createQuery("from Review where reviewsId = "+id);
         }
         if(Tutor.class == type){
-
+            return session.createQuery("from Tutor where tutorId = "+id);
         }
         if(User.class == type){
-
+            return session.createQuery("from User where username = "+id);
         }
         if(Video.class == type){
-
+            return session.createQuery("from Video where videoId = "+id);
         }
         return null;
     }
