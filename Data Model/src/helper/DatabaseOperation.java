@@ -130,32 +130,62 @@ public class DatabaseOperation<T extends Object> {
         }
         return null;
     }
-
     private Query getQueryForID(String id){
         if (Helper.sessionFactory == null)
             Helper.init();
         Session session = Helper.sessionFactory.openSession();
         Query query = null;
         if(Answer.class == type){
-            return session.createQuery("from Answer where answerId = "+id);
+            return session.createQuery("from Answer where answerId = :param").setParameter("param",id);
         }
         if(Course.class == type){
-            return session.createQuery("from Course where courseId = "+id);
+            return session.createQuery("from Course where courseId = :param").setParameter("param",id);
         }
         if(Question.class == type){
-            return session.createQuery("from Question where questionId = "+id);
+            return session.createQuery("from Question where questionId = :param").setParameter("param",id);
         }
         if(Review.class == type){
-            return session.createQuery("from Review where reviewsId = "+id);
+            return session.createQuery("from Review where reviewsId = :param").setParameter("param",id);
         }
         if(Tutor.class == type){
-            return session.createQuery("from Tutor where tutorId = "+id);
+            return session.createQuery("from Tutor where tutorId = :param").setParameter("param",id);
         }
         if(User.class == type){
-            return session.createQuery("from User where username = "+id);
+            return session.createQuery("from User where username = :param").setParameter("param",id);
         }
         if(Video.class == type){
-            return session.createQuery("from Video where videoId = "+id);
+            return session.createQuery("from Video where videoId = :param").setParameter("param",id);
+        }
+        return null;
+    }
+
+    public List<T> getByName(String name){
+        try{
+            Query query = getQueryForName(name);
+            return query.list();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    private Query getQueryForName(String name){
+        if (Helper.sessionFactory == null)
+            Helper.init();
+        Session session = Helper.sessionFactory.openSession();
+        Query query = null;
+
+        if(Course.class == type){
+            return session.createQuery("from Course where name like :param").setParameter("param","%"+name+"%");
+        }
+        if(Question.class == type){
+            return session.createQuery("from Question where data like :param").setParameter("param","%"+name+"%");
+        }
+
+        if(Tutor.class == type){
+            return session.createQuery("from Tutor where name like :param").setParameter("param","%"+name+"%");
+        }
+        if(User.class == type){
+            return session.createQuery("from User where name like :param").setParameter("param","%"+name+"%");
         }
         return null;
     }

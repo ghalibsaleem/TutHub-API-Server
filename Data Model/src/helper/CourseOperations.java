@@ -34,9 +34,13 @@ public class CourseOperations {
             Helper.init();
         Session session = Helper.sessionFactory.openSession();
         try {
-            Query query = session.createQuery("from Course where tutorId = :tutorid");
-            // FIXME: 3/2/2016
-            query.setParameter("tutorid",tags[0]);
+            Query query = session.createQuery("from Course where tags like in (:tags)");
+            String finaltag = "";
+            for (String tag:tags) {
+                finaltag += "%"+tag+"%,";
+            }
+            finaltag  = finaltag.substring(0,finaltag.length()-2);
+            query.setParameter("tags",finaltag);
             return query.list();
         }catch (Exception e){
 
@@ -47,7 +51,7 @@ public class CourseOperations {
         return null;
     }
 
-    public List<Course> getCousesByType(String type){
+    public List<Course> getCoursesByType(String type){
         if (Helper.sessionFactory == null)
             Helper.init();
         Session session = Helper.sessionFactory.openSession();

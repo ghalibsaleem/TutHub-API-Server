@@ -9,7 +9,7 @@ import org.hibernate.service.ServiceRegistryBuilder;
  * Created by ghalib on 3/2/2016.
  */
 public class Helper {
-    public static SessionFactory sessionFactory = null;
+    protected static SessionFactory sessionFactory = null;
 
     public static void init(){
         if (sessionFactory == null)
