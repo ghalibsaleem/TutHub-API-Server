@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class CourseOperations {
 
-    public List<Course> getCoursesFromTutuor(String tutor_id){
+    public List<Course> getCoursesFromTutor(String tutor_id){
         if (Helper.sessionFactory == null)
             Helper.init();
         Session session = Helper.sessionFactory.openSession();

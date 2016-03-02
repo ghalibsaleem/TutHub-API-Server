@@ -1,22 +1,22 @@
 package helper;
 
-import entities.Video;
+import entities.Answer;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
 import java.util.List;
 
 /**
- * Created by ghalib on 2/10/2016.
+ * Created by ghalib on 3/3/2016.
  */
-public class VideoOperations {
-    public List<Video> getQuestionByVideo(String courseId){
+public class AnswerOperations {
+    public List<Answer> getAnswersByQuestion(String questionid){
         if (Helper.sessionFactory == null)
             Helper.init();
         Session session = Helper.sessionFactory.openSession();
         try {
-            Query query = session.createQuery("from Video where courseId = :courseId");
-            query.setParameter("courseId",courseId);
+            Query query = session.createQuery("from Answer where questionId = :questionid");
+            query.setParameter("questionid",questionid);
             return query.list();
         }catch (Exception e){
 
