@@ -3,8 +3,8 @@ package org.tuthub.api.resources;
 
 
 
+import entities.restricted.RestrictedUser;
 import helper.DatabaseOperation;
-import helper.UserOperation;
 import entities.User;
 
 import javax.ws.rs.*;
@@ -17,6 +17,7 @@ import java.util.List;
 
 @Path("users")
 @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 public class UserResource {
 
     /**
@@ -38,14 +39,15 @@ public class UserResource {
     //for restricted access and User Search access
     @GET
     @Path("/{username}")
-    public User getUser(@PathParam("username") String username){
-        // TODO: 2/27/2016  
-        return new User();
+    public RestrictedUser getUser(@PathParam("username") String username){
+        DatabaseOperation<User> userDatabaseOperation = new DatabaseOperation<User>(User.class);
+        RestrictedUser user = new RestrictedUser(userDatabaseOperation.getbyID(username));
+        return user;
     }
 
     @GET
     @Path("search/{username}")
-    public List<User> getUsers(@QueryParam("start") int start,
+    public List<RestrictedUser> getUsers(@QueryParam("start") int start,
                                @QueryParam("size") int size,
                                @PathParam("username") String username){
         // TODO: 2/27/2016  
@@ -53,28 +55,29 @@ public class UserResource {
     }
 
     @POST
-    @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
     public User addUser(User user){
-        // TODO: 2/27/2016  
+        DatabaseOperation<User> userDatabaseOperation = new DatabaseOperation<User>(User.class);
+        userDatabaseOperation.add(user);
         return user;
     }
 
     @PUT
-    @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
     public User updateUser(User user){
-        // TODO: 2/27/2016  
-        return null;
+        DatabaseOperation<User> userDatabaseOperation = new DatabaseOperation<User>(User.class);
+        userDatabaseOperation.update(user);
+        return user;
     }
 
     @DELETE
-    @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
     public void deleteUser(User user){
-        // TODO: 2/27/2016  
+        DatabaseOperation<User> userDatabaseOperation = new DatabaseOperation<User>(User.class);
+        userDatabaseOperation.delete(user);
     }
 
-    @GET
-    @Path("{userid}/courses")
-    public CourseResouce getCourse(){
-        return new CourseResouce();
+
+    @Path("{userId}/courses")
+    public CourseResource getCourse(){
+
+        return new CourseResource();
     }
 }

@@ -64,13 +64,13 @@
       </foreign-key>
       <foreign-key id="22" parent="2" name="tutor_answer_FK">
         <columns>tutor_id</columns>
-        <ref-key>~.tutors.tutor_id_UNIQUE</ref-key>
+        <ref-key>~.tutors.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
       <foreign-key id="23" parent="2" name="user_answer_FK">
         <columns>username</columns>
-        <ref-key>~.users.username_UNIQUE</ref-key>
+        <ref-key>~.users.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
@@ -124,7 +124,7 @@
       </key>
       <foreign-key id="37" parent="3" name="Tutor_FK">
         <columns>tutor_id</columns>
-        <ref-key>~.tutors.tutor_id_UNIQUE</ref-key>
+        <ref-key>~.tutors.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
@@ -159,7 +159,7 @@
       </key>
       <foreign-key id="46" parent="4" name="user_question_FK">
         <columns>username</columns>
-        <ref-key>~.users.username_UNIQUE</ref-key>
+        <ref-key>~.users.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
@@ -209,7 +209,7 @@
       </foreign-key>
       <foreign-key id="58" parent="5" name="user_comment_FK">
         <columns>username</columns>
-        <ref-key>~.users.username_UNIQUE</ref-key>
+        <ref-key>~.users.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
@@ -250,8 +250,7 @@
         <underlying-index>email_UNIQUE</underlying-index>
       </key>
       <key id="68" parent="6" name="PRIMARY">
-        <columns>tutor_id
-email</columns>
+        <columns>tutor_id</columns>
         <primary>1</primary>
       </key>
       <key id="69" parent="6" name="tutor_id_UNIQUE">
@@ -299,7 +298,7 @@ email</columns>
       </foreign-key>
       <foreign-key id="80" parent="7" name="User_FK">
         <columns>username</columns>
-        <ref-key>~.users.username_UNIQUE</ref-key>
+        <ref-key>~.users.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
@@ -348,8 +347,7 @@ email</columns>
         <underlying-index>email_UNIQUE</underlying-index>
       </key>
       <key id="92" parent="8" name="PRIMARY">
-        <columns>username
-email</columns>
+        <columns>username</columns>
         <primary>1</primary>
       </key>
       <key id="93" parent="8" name="username_UNIQUE">

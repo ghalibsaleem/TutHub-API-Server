@@ -1,5 +1,7 @@
 package entities;
 
+import entities.restricted.RestrictedTutor;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -7,10 +9,8 @@ import javax.xml.bind.annotation.XmlTransient;
 /**
  * Created by ghalib on 3/2/2016.
  */
-@XmlRootElement
 @Entity
 @Table(name = "tutors", schema = "tut_hub_server_db", catalog = "")
-@IdClass(TutorPK.class)
 public class Tutor {
     private String tutorId;
     private String email;
@@ -29,7 +29,7 @@ public class Tutor {
         this.tutorId = tutorId;
     }
 
-    @Id
+    @Basic
     @Column(name = "email")
     public String getEmail() {
         return email;
@@ -39,7 +39,6 @@ public class Tutor {
         this.email = email;
     }
 
-    @XmlTransient
     @Basic
     @Column(name = "password")
     public String getPassword() {

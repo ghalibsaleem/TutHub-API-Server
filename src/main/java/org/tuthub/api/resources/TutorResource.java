@@ -46,7 +46,7 @@ public class TutorResource {
 
     @GET
     @Path("{tutorid}/courses")
-    public CourseResouce getCourse(){
-        return new CourseResouce();
+    public CourseResource getCourse(){
+        return new CourseResource();
     }
 }

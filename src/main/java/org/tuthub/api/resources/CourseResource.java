@@ -8,14 +8,27 @@ import javax.ws.rs.core.MediaType;
 /**
  * Created by ghalib on 2/26/2016.
  */
-@Path("courses")
+@Path("/{a:courses|}")
 @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 @Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
-public class CourseResouce {
+public class CourseResource {
 
     @GET
-    @Path("{courseid}")
+    @Path("/{courseid}")
     public Course getCourse(@PathParam("courseid") String courseid){
+        // TODO: 2/27/2016
+        return null;
+    }
+
+    @GET
+    public Course getCourseByUserOrTuror(
+            @PathParam("userId") String username,
+            @PathParam("tutorId") String tutorId){
+        if (username != null){
+
+        }else if (tutorId != null){
+
+        }
         // TODO: 2/27/2016
         return null;
     }

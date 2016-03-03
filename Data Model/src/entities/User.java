@@ -1,9 +1,12 @@
 package entities;
 
+import adapters.PasswordAdapter;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import java.sql.Date;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.util.Date;
 
 /**
  * Created by ghali on 3/2/2016.
@@ -11,7 +14,6 @@ import java.sql.Date;
 @XmlRootElement
 @Entity
 @Table(name = "users", schema = "tut_hub_server_db", catalog = "")
-@IdClass(UserPK.class)
 public class User {
     private String username;
     private String email;
@@ -32,7 +34,7 @@ public class User {
         this.username = username;
     }
 
-    @Id
+    @Basic
     @Column(name = "email")
     public String getEmail() {
         return email;
@@ -42,7 +44,7 @@ public class User {
         this.email = email;
     }
 
-    @XmlTransient
+    @XmlJavaTypeAdapter(PasswordAdapter.class)
     @Basic
     @Column(name = "password")
     public String getPassword() {

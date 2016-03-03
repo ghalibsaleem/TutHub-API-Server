@@ -11,13 +11,31 @@ import java.util.List;
  */
 public class CourseOperations {
 
-    public List<Course> getCoursesFromTutor(String tutor_id){
+    public List<Course> getCoursesByTutor(String tutor_id){
         if (Helper.sessionFactory == null)
             Helper.init();
         Session session = Helper.sessionFactory.openSession();
         try {
             Query query = session.createQuery("from Course where tutorId = :tutorid");
             query.setParameter("tutorid",tutor_id);
+            return query.list();
+        }catch (Exception e){
+
+        }
+        finally {
+            if (session!=null && session.isOpen())
+                session.close();
+        }
+        return null;
+    }
+
+    public List<Course> getCoursesByUser(String username){
+        if (Helper.sessionFactory == null)
+            Helper.init();
+        Session session = Helper.sessionFactory.openSession();
+        try {
+            Query query = session.createQuery("from Course where tutorId = :tutorid");
+            query.setParameter("tutorid",username);
             return query.list();
         }catch (Exception e){
 
