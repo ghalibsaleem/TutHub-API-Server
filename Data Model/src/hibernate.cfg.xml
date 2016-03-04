@@ -4,19 +4,22 @@
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-    <property name="connection.url">jdbc:mysql://localhost:3308/tut_hub_server_db</property>
-    <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="connection.username">root</property>
-    <property name="connection.password">1234</property>
-    <mapping class="entities.Answer"/>
-    <mapping class="entities.Course"/>
-    <mapping class="entities.Question"/>
-    <mapping class="entities.Review"/>
-    <mapping class="entities.Tutor"/>
-    <mapping class="entities.User"/>
-    <mapping class="entities.Video"/>
+      <property name="connection.url">jdbc:mysql://localhost:3308/tut_hub_server_db</property>
+      <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+      <property name="hibernate.c3p0.timeout">60</property>
+      <property name="connection.username">root</property>
+      <property name="connection.password">1234</property>
+      <mapping class="entities.Answer"/>
+      <mapping class="entities.Course"/>
+      <mapping class="entities.Question"/>
+      <mapping class="entities.Review"/>
+      <mapping class="entities.Tutor"/>
+      <mapping class="entities.UserCourseRel"/>
+      <mapping class="entities.User"/>
+      <mapping class="entities.Video"/>
 
-    <!-- DB schema will be updated if needed -->
+
+      <!-- DB schema will be updated if needed -->
     <!-- <property name="hbm2ddl.auto">update</property> -->
   </session-factory>
 </hibernate-configuration>
