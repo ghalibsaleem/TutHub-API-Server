@@ -1,19 +1,21 @@
 package entities;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import java.util.List;
 
 /**
- * Created by ghali on 3/2/2016.
+ * Created by ghali on 3/5/2016.
  */
+@XmlRootElement
 @Entity
 @Table(name = "questions", schema = "tut_hub_server_db", catalog = "")
 public class Question {
     private int questionId;
     private String data;
-    private int videoId;
-    private String username;
+    private List<Answer> answers;
+    private Video video;
 
     @Id
     @Column(name = "question_id")
@@ -35,27 +37,6 @@ public class Question {
         this.data = data;
     }
 
-    @Basic
-    @Column(name = "video_id")
-    public int getVideoId() {
-        return videoId;
-    }
-
-    public void setVideoId(int videoId) {
-        this.videoId = videoId;
-    }
-
-    @Basic
-    @Column(name = "username")
-    public String getUsername() {
-        return username;
-    }
-
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -64,9 +45,7 @@ public class Question {
         Question question = (Question) o;
 
         if (questionId != question.questionId) return false;
-        if (videoId != question.videoId) return false;
         if (data != null ? !data.equals(question.data) : question.data != null) return false;
-        if (username != null ? !username.equals(question.username) : question.username != null) return false;
 
         return true;
     }
@@ -75,8 +54,27 @@ public class Question {
     public int hashCode() {
         int result = questionId;
         result = 31 * result + (data != null ? data.hashCode() : 0);
-        result = 31 * result + videoId;
-        result = 31 * result + (username != null ? username.hashCode() : 0);
         return result;
+    }
+
+    @XmlTransient
+    @OneToMany(mappedBy = "question")
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
+    }
+
+    @XmlTransient
+    @ManyToOne
+    @JoinColumn(name = "video_id", referencedColumnName = "video_id", nullable = false)
+    public Video getVideo() {
+        return video;
+    }
+
+    public void setVideo(Video video) {
+        this.video = video;
     }
 }

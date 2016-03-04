@@ -4,12 +4,13 @@ import adapters.PasswordAdapter;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.util.Date;
+import java.sql.Date;
+import java.util.List;
 
 /**
- * Created by ghali on 3/2/2016.
+ * Created by ghali on 3/5/2016.
  */
 @XmlRootElement
 @Entity
@@ -23,6 +24,7 @@ public class User {
     private Date dob;
     private String address;
     private String mobileno;
+    private List<UserCourseRel> user_course_rels;
 
     @Id
     @Column(name = "username")
@@ -135,5 +137,15 @@ public class User {
         result = 31 * result + (address != null ? address.hashCode() : 0);
         result = 31 * result + (mobileno != null ? mobileno.hashCode() : 0);
         return result;
+    }
+
+    @XmlTransient
+    @OneToMany(mappedBy = "user")
+    public List<UserCourseRel> getUser_course_rels() {
+        return user_course_rels;
+    }
+
+    public void setUser_course_rels(List<UserCourseRel> user_course_rels) {
+        this.user_course_rels = user_course_rels;
     }
 }

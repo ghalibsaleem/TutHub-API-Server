@@ -1,10 +1,14 @@
 package entities;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import java.util.List;
 
 /**
- * Created by ghali on 3/2/2016.
+ * Created by ghali on 3/5/2016.
  */
+@XmlRootElement
 @Entity
 @Table(name = "courses", schema = "tut_hub_server_db", catalog = "")
 public class Course {
@@ -14,11 +18,14 @@ public class Course {
     private String description;
     private Byte isCertification;
     private Byte isExam;
-    private String tutorId;
     private String tags;
     private String excersiceUrl;
     private Integer rating;
     private Byte isVerified;
+    private List<Video> videos;
+    private Tutor tutor;
+    private List<UserCourseRel> user_course_rels;
+    private List<Review> reviews;
 
     @Id
     @Column(name = "course_id")
@@ -81,16 +88,6 @@ public class Course {
     }
 
     @Basic
-    @Column(name = "tutor_id")
-    public String getTutorId() {
-        return tutorId;
-    }
-
-    public void setTutorId(String tutorId) {
-        this.tutorId = tutorId;
-    }
-
-    @Basic
     @Column(name = "tags")
     public String getTags() {
         return tags;
@@ -144,7 +141,6 @@ public class Course {
         if (isCertification != null ? !isCertification.equals(course.isCertification) : course.isCertification != null)
             return false;
         if (isExam != null ? !isExam.equals(course.isExam) : course.isExam != null) return false;
-        if (tutorId != null ? !tutorId.equals(course.tutorId) : course.tutorId != null) return false;
         if (tags != null ? !tags.equals(course.tags) : course.tags != null) return false;
         if (excersiceUrl != null ? !excersiceUrl.equals(course.excersiceUrl) : course.excersiceUrl != null)
             return false;
@@ -162,11 +158,51 @@ public class Course {
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (isCertification != null ? isCertification.hashCode() : 0);
         result = 31 * result + (isExam != null ? isExam.hashCode() : 0);
-        result = 31 * result + (tutorId != null ? tutorId.hashCode() : 0);
         result = 31 * result + (tags != null ? tags.hashCode() : 0);
         result = 31 * result + (excersiceUrl != null ? excersiceUrl.hashCode() : 0);
         result = 31 * result + (rating != null ? rating.hashCode() : 0);
         result = 31 * result + (isVerified != null ? isVerified.hashCode() : 0);
         return result;
+    }
+
+    @XmlTransient
+    @OneToMany(mappedBy = "course")
+    public List<Video> getVideos() {
+        return videos;
+    }
+
+    public void setVideos(List<Video> videos) {
+        this.videos = videos;
+    }
+
+    @XmlTransient
+    @ManyToOne
+    @JoinColumn(name = "tutor_id", referencedColumnName = "tutor_id")
+    public Tutor getTutor() {
+        return tutor;
+    }
+
+    public void setTutor(Tutor tutor) {
+        this.tutor = tutor;
+    }
+
+    @XmlTransient
+    @OneToMany(mappedBy = "course")
+    public List<UserCourseRel> getUser_course_rels() {
+        return user_course_rels;
+    }
+
+    public void setUser_course_rels(List<UserCourseRel> user_course_rels) {
+        this.user_course_rels = user_course_rels;
+    }
+
+    @XmlTransient
+    @OneToMany(mappedBy = "course")
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }

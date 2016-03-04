@@ -1,18 +1,23 @@
 package entities;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import java.util.List;
 
 /**
- * Created by ghali on 3/2/2016.
+ * Created by ghali on 3/5/2016.
  */
+@XmlRootElement
 @Entity
 @Table(name = "videos", schema = "tut_hub_server_db", catalog = "")
 public class Video {
     private int videoId;
-    private int courseId;
     private String videoUrl;
     private String description;
     private String excerciseUrl;
+    private List<Question> questions;
+    private Course course;
 
     @Id
     @Column(name = "video_id")
@@ -22,16 +27,6 @@ public class Video {
 
     public void setVideoId(int videoId) {
         this.videoId = videoId;
-    }
-
-    @Basic
-    @Column(name = "course_id")
-    public int getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(int courseId) {
-        this.courseId = courseId;
     }
 
     @Basic
@@ -72,7 +67,6 @@ public class Video {
         Video video = (Video) o;
 
         if (videoId != video.videoId) return false;
-        if (courseId != video.courseId) return false;
         if (videoUrl != null ? !videoUrl.equals(video.videoUrl) : video.videoUrl != null) return false;
         if (description != null ? !description.equals(video.description) : video.description != null) return false;
         if (excerciseUrl != null ? !excerciseUrl.equals(video.excerciseUrl) : video.excerciseUrl != null) return false;
@@ -83,10 +77,30 @@ public class Video {
     @Override
     public int hashCode() {
         int result = videoId;
-        result = 31 * result + courseId;
         result = 31 * result + (videoUrl != null ? videoUrl.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (excerciseUrl != null ? excerciseUrl.hashCode() : 0);
         return result;
+    }
+
+    @XmlTransient
+    @OneToMany(mappedBy = "video")
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
+
+    @XmlTransient
+    @ManyToOne
+    @JoinColumn(name = "course_id", referencedColumnName = "course_id", nullable = false)
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }

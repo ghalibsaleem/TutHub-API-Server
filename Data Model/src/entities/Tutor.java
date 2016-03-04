@@ -1,14 +1,17 @@
 package entities;
 
-import entities.restricted.RestrictedTutor;
+import adapters.PasswordAdapter;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.util.List;
 
 /**
- * Created by ghalib on 3/2/2016.
+ * Created by ghali on 3/5/2016.
  */
+@XmlRootElement
 @Entity
 @Table(name = "tutors", schema = "tut_hub_server_db", catalog = "")
 public class Tutor {
@@ -18,6 +21,7 @@ public class Tutor {
     private String name;
     private String description;
     private String address;
+    private List<Course> courses;
 
     @Id
     @Column(name = "tutor_id")
@@ -39,6 +43,7 @@ public class Tutor {
         this.email = email;
     }
 
+    @XmlJavaTypeAdapter(PasswordAdapter.class)
     @Basic
     @Column(name = "password")
     public String getPassword() {
@@ -105,5 +110,15 @@ public class Tutor {
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
         return result;
+    }
+
+    @XmlTransient
+    @OneToMany(mappedBy = "tutor")
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 }
