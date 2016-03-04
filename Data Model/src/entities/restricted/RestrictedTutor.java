@@ -1,5 +1,7 @@
 package entities.restricted;
 
+import entities.Tutor;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -52,5 +54,11 @@ public class RestrictedTutor {
         this.name = name;
         this.description = description;
         this.address = address;
+    }
+    public RestrictedTutor(Tutor tutor){
+        this.tutorId = tutor.getTutorId();
+        this.name = tutor.getName();
+        this.description = tutor.getDescription();
+        this.address = tutor.getAddress();
     }
 }
