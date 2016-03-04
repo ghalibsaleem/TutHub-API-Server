@@ -1,9 +1,13 @@
 package org.tuthub.api.resources;
 
 import entities.Tutor;
+import entities.restricted.RestrictedTutor;
+import helper.DatabaseOperation;
+import helper.TutorOperations;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 /**
  * Created by ghalib on 2/26/2016.
@@ -14,38 +18,49 @@ import javax.ws.rs.core.MediaType;
 public class TutorResource {
 
     @GET
-    @Path("{tutorid}")
-    public Tutor getTutor(){
-        // TODO: 2/27/2016
-        return null;
+    @Path("{tutorId}")
+    public RestrictedTutor getTutor(@PathParam("tutorId") String tutorId){
+        TutorOperations tutorOperations = new TutorOperations();
+        return new RestrictedTutor(tutorOperations.getById(tutorId));
+    }
+
+    @GET
+    @Path("search/{tutorId}")
+    public List<Tutor> getTutors(@QueryParam("start") int start,
+                               @QueryParam("size") int size,
+                               @PathParam("tutorId") String tutorId){
+        TutorOperations tutorOperations = new TutorOperations();
+        return tutorOperations.getByName(tutorId);
     }
 
     @POST
-    public Tutor loginTutor(Tutor tutor){
-        // TODO: 2/27/2016
-        return null;
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public Tutor getTutor(@FormParam("tutorId") String tutorId, @FormParam("password") String password){
+        TutorOperations tutorOperations = new TutorOperations();
+        return tutorOperations.getTutor(tutorId,password);
     }
 
     @POST
-    @Path("{tutorid}")
-    public Tutor updateTutor(@PathParam("tutorid") String tutorid,Tutor tutor){
-        // TODO: 2/27/2016  
-        return null;
+    @Path("{tutorId}")
+    public Tutor updateTutor(@PathParam("tutorId") String tutorId,Tutor tutor){
+        TutorOperations tutorOperations = new TutorOperations();
+        return tutorOperations.updateTutor(tutor);
     }
 
     @PUT
     public Tutor addTutor(Tutor tutor){
-        // TODO: 2/27/2016
-        return null;
+        TutorOperations tutorOperations = new TutorOperations();
+        return tutorOperations.addTutor(tutor);
     }
 
     @DELETE
-    public void deleteTutor(Tutor tutor){
-        // TODO: 2/27/2016
+    @Path("{tutorId}")
+    public void deleteTutor(@PathParam("tutorId") String tutorId,Tutor tutor){
+        TutorOperations tutorOperations = new TutorOperations();
+        tutorOperations.deleteTutor(tutor);
     }
 
-    @GET
-    @Path("{tutorid}/courses")
+    @Path("{tutorId}/courses")
     public CourseResource getCourse(){
         return new CourseResource();
     }
