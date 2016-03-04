@@ -4,7 +4,6 @@ import entities.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.sql.*;
 import java.util.List;
 
 /**
@@ -12,21 +11,21 @@ import java.util.List;
  */
 public class UserOperation {
 
-    public boolean userLogin(String username, String password) {
+    private boolean userLogin(String username, String password) {
         if (Helper.sessionFactory == null)
             Helper.init();
         Session session = Helper.sessionFactory.openSession();
         try {
-            Query query = null;
+            Query query;
             if (username.contains("@"))
                 query = session.createQuery("from User where email = :username and password = :password");
             else
                 query = session.createQuery("from User where username = :username and password = :password");
             query.setParameter("username",username);
             query.setParameter("password",password);
-            List<User> userList = query.list();
-            if (userList.size() > 0)
-            return true;
+            User user = (User) query.uniqueResult();
+            if (user!=null)
+                return true;
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -67,9 +66,11 @@ public class UserOperation {
             Helper.init();
         Session session = Helper.sessionFactory.openSession();
         try {
-            session.beginTransaction();
-            session.update(user);
-            session.getTransaction().commit();
+            if (userLogin(user.getUsername(),user.getPassword())){
+                session.beginTransaction();
+                boolean a = session.contains(user);
+                session.getTransaction().commit();
+            }
         }catch (Exception e){
             session.getTransaction().rollback();
         }
@@ -103,9 +104,11 @@ public class UserOperation {
             Helper.init();
         Session session = Helper.sessionFactory.openSession();
         try {
-            session.beginTransaction();
-            session.delete(user);
-            session.getTransaction().commit();
+            if (userLogin(user.getUsername(),user.getPassword())) {
+                session.beginTransaction();
+                session.delete(user);
+                session.getTransaction().commit();
+            }
         }catch (Exception e){
             session.getTransaction().rollback();
             return false;
@@ -117,8 +120,35 @@ public class UserOperation {
         return true;
     }
 
-    public List<String> findUser(String subString){
-        // TODO: 3/2/2016
+    public User getById(String username){
+        if (Helper.sessionFactory == null)
+            Helper.init();
+        Session session = Helper.sessionFactory.openSession();
+        try {
+            Query query = session.createQuery("from User where username = :param").setParameter("param",username);
+            return (User) query.uniqueResult();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            if (session!=null && session.isOpen())
+                session.close();
+        }
+        return null;
+    }
+
+    public List<User> getByName(String subString){
+        if (Helper.sessionFactory == null)
+            Helper.init();
+        Session session = Helper.sessionFactory.openSession();
+        try {
+            Query query = session.createQuery("from User where name like :param").setParameter("param","%"+subString+"%");
+            return query.list();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            if (session!=null && session.isOpen())
+                session.close();
+        }
         return null;
     }
 }
