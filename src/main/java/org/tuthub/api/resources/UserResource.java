@@ -3,9 +3,9 @@ package org.tuthub.api.resources;
 
 
 
-import entities.restricted.RestrictedUser;
-import helper.DatabaseOperation;
 import entities.User;
+import entities.restricted.RestrictedUser;
+import helper.UserOperation;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -27,12 +27,11 @@ public class UserResource {
      * @return String that will be returned as a application/xml or application/json response.
      */
 
-    @GET
-    public User getUser(@QueryParam("username") String username, @QueryParam("password") String password){
-        //UserOperation userOperation = new UserOperation();
-        //User user = userOperation.getUser(username,password);
-        DatabaseOperation<User> userDatabaseOperation = new DatabaseOperation<User>(User.class);
-        User user = userDatabaseOperation.login(username,password);
+    @POST
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public User login(@FormParam("username") String username, @FormParam("password") String password){
+        UserOperation userOperation = new UserOperation();
+        User user = userOperation.getUser(username,password);
         return user;
     }
 
@@ -40,44 +39,45 @@ public class UserResource {
     @GET
     @Path("/{username}")
     public RestrictedUser getUser(@PathParam("username") String username){
-        DatabaseOperation<User> userDatabaseOperation = new DatabaseOperation<User>(User.class);
-        RestrictedUser user = new RestrictedUser(userDatabaseOperation.getbyID(username));
+        UserOperation userOperation = new UserOperation();
+        RestrictedUser user = new RestrictedUser(userOperation.getById(username));
         return user;
     }
 
     @GET
     @Path("search/{username}")
-    public List<RestrictedUser> getUsers(@QueryParam("start") int start,
+    public List<User> getUsers(@QueryParam("start") int start,
                                @QueryParam("size") int size,
                                @PathParam("username") String username){
-        // TODO: 2/27/2016  
-        return null;
+        UserOperation userOperation = new UserOperation();
+        return userOperation.getByName(username);
     }
+
 
     @POST
     public User addUser(User user){
-        DatabaseOperation<User> userDatabaseOperation = new DatabaseOperation<User>(User.class);
-        userDatabaseOperation.add(user);
-        return user;
+        UserOperation userOperation = new UserOperation();
+        return userOperation.addUser(user);
     }
 
     @PUT
+    @Path("{username}")
     public User updateUser(User user){
-        DatabaseOperation<User> userDatabaseOperation = new DatabaseOperation<User>(User.class);
-        userDatabaseOperation.update(user);
-        return user;
+        UserOperation userOperation = new UserOperation();
+        return userOperation.updateUser(user);
     }
 
     @DELETE
+    @Path("{username}")
     public void deleteUser(User user){
-        DatabaseOperation<User> userDatabaseOperation = new DatabaseOperation<User>(User.class);
-        userDatabaseOperation.delete(user);
+        UserOperation userOperation = new UserOperation();
+        userOperation.deleteUser(user);
     }
 
 
-    @Path("{userId}/courses")
+    @Path("{username}/courses")
     public CourseResource getCourse(){
-
+        // FIXME: 3/5/2016 
         return new CourseResource();
     }
 }
