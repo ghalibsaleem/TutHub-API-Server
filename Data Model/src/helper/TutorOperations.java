@@ -5,10 +5,6 @@ import entities.Tutor;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 /**
@@ -16,7 +12,7 @@ import java.util.List;
  */
 public class TutorOperations {
 
-    public boolean tutorLogin(String username, String password) {
+    private boolean tutorLogin(String username, String password) {
         if (Helper.sessionFactory == null)
             Helper.init();
         Session session = Helper.sessionFactory.openSession();
@@ -70,9 +66,11 @@ public class TutorOperations {
             Helper.init();
         Session session = Helper.sessionFactory.openSession();
         try {
-            session.beginTransaction();
-            session.update(tutor);
-            session.getTransaction().commit();
+            if (tutorLogin(tutor.getTutorId(),tutor.getPassword())){
+                session.beginTransaction();
+                session.update(tutor);
+                session.getTransaction().commit();
+            }
         }catch (Exception e){
             session.getTransaction().rollback();
         }
@@ -106,9 +104,11 @@ public class TutorOperations {
             Helper.init();
         Session session = Helper.sessionFactory.openSession();
         try {
-            session.beginTransaction();
-            session.save(tutor);
-            session.getTransaction().commit();
+            if (tutorLogin(tutor.getTutorId(),tutor.getPassword())) {
+                session.beginTransaction();
+                session.delete(tutor);
+                session.getTransaction().commit();
+            }
             return true;
         }catch (Exception e){
             session.getTransaction().rollback();
@@ -118,5 +118,37 @@ public class TutorOperations {
                 session.close();
         }
         return false;
+    }
+
+    public Tutor getById(String tutorId){
+        if (Helper.sessionFactory == null)
+            Helper.init();
+        Session session = Helper.sessionFactory.openSession();
+        try {
+            Query query = session.createQuery("from Tutor where tutorId = :param").setParameter("param",tutorId);
+            return (Tutor) query.uniqueResult();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            if (session!=null && session.isOpen())
+                session.close();
+        }
+        return null;
+    }
+
+    public List<Tutor> getByName(String subString){
+        if (Helper.sessionFactory == null)
+            Helper.init();
+        Session session = Helper.sessionFactory.openSession();
+        try {
+            Query query = session.createQuery("from Tutor where name like :param").setParameter("param","%"+subString+"%");
+            return query.list();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            if (session!=null && session.isOpen())
+                session.close();
+        }
+        return null;
     }
 }
