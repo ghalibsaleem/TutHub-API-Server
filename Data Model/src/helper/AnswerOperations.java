@@ -1,6 +1,7 @@
 package helper;
 
 import entities.Answer;
+import entities.Question;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -15,9 +16,10 @@ public class AnswerOperations {
             Helper.init();
         Session session = Helper.sessionFactory.openSession();
         try {
-            Query query = session.createQuery("from Answer where questionId = :questionid");
-            query.setParameter("questionid",questionid);
-            return query.list();
+            Query query = session.createQuery("from Question where questionId= :questionId");
+            query.setParameter("questionId",questionid);
+            Question question= (Question) query.uniqueResult();
+            return question.getAnswers();
         }catch (Exception e){
 
         }

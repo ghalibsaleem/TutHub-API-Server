@@ -3,7 +3,6 @@ package org.tuthub.api.resources;
 import entities.Video;
 
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import java.util.List;

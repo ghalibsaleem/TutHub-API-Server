@@ -2,8 +2,8 @@ package org.tuthub.api.services;
 
 
 
-import helper.UserOperation;
 import entities.User;
+import helper.UserOperation;
 
 /**
  * Created by ghali on 2/24/2016.

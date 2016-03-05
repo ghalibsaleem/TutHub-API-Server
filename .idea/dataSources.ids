@@ -16,378 +16,406 @@
       <table id="7" parent="1" name="user_course_rel"/>
       <table id="8" parent="1" name="users"/>
       <table id="9" parent="1" name="videos"/>
-      <column id="10" parent="2" name="answer_id">
+      <table id="10" parent="1" name="test_table"/>
+      <column id="11" parent="2" name="answer_id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="11" parent="2" name="data">
+      <column id="12" parent="2" name="data">
         <mandatory>1</mandatory>
         <data-type>varchar(500)</data-type>
       </column>
-      <column id="12" parent="2" name="username">
+      <column id="13" parent="2" name="username">
         <data-type>varchar(50)</data-type>
       </column>
-      <column id="13" parent="2" name="tutor_id">
+      <column id="14" parent="2" name="tutor_id">
         <data-type>varchar(50)</data-type>
       </column>
-      <column id="14" parent="2" name="question_id">
+      <column id="15" parent="2" name="question_id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="15" parent="2" name="likes">
+      <column id="16" parent="2" name="likes">
         <data-type>int(11)</data-type>
       </column>
-      <column id="16" parent="2" name="dislikes">
+      <column id="17" parent="2" name="dislikes">
         <data-type>int(11)</data-type>
       </column>
-      <index id="17" parent="2" name="question_answer_FK_idx">
+      <index id="18" parent="2" name="question_answer_FK_idx">
         <columns>question_id</columns>
         <desc-columns></desc-columns>
       </index>
-      <index id="18" parent="2" name="tutor_answer_FK_idx">
+      <index id="19" parent="2" name="tutor_answer_FK_idx">
         <columns>tutor_id</columns>
         <desc-columns></desc-columns>
       </index>
-      <index id="19" parent="2" name="user_answer_FK_idx">
+      <index id="20" parent="2" name="user_answer_FK_idx">
         <columns>username</columns>
         <desc-columns></desc-columns>
       </index>
-      <key id="20" parent="2" name="PRIMARY">
+      <key id="21" parent="2" name="PRIMARY">
         <columns>answer_id</columns>
         <primary>1</primary>
       </key>
-      <foreign-key id="21" parent="2" name="question_answer_FK">
+      <foreign-key id="22" parent="2" name="question_answer_FK">
         <columns>question_id</columns>
         <ref-key>~.questions.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="22" parent="2" name="tutor_answer_FK">
+      <foreign-key id="23" parent="2" name="tutor_answer_FK">
         <columns>tutor_id</columns>
         <ref-key>~.tutors.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="23" parent="2" name="user_answer_FK">
+      <foreign-key id="24" parent="2" name="user_answer_FK">
         <columns>username</columns>
         <ref-key>~.users.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <column id="24" parent="3" name="course_id">
+      <column id="25" parent="3" name="course_id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="25" parent="3" name="name">
+      <column id="26" parent="3" name="name">
         <mandatory>1</mandatory>
         <data-type>varchar(50)</data-type>
       </column>
-      <column id="26" parent="3" name="type">
+      <column id="27" parent="3" name="type">
         <mandatory>1</mandatory>
         <data-type>varchar(45)</data-type>
       </column>
-      <column id="27" parent="3" name="description">
+      <column id="28" parent="3" name="description">
         <data-type>varchar(300)</data-type>
       </column>
-      <column id="28" parent="3" name="is_certification">
+      <column id="29" parent="3" name="is_certification">
         <data-type>tinyint(1)</data-type>
         <default-expression>&apos;0&apos;</default-expression>
       </column>
-      <column id="29" parent="3" name="is_exam">
+      <column id="30" parent="3" name="is_exam">
         <data-type>tinyint(1)</data-type>
         <default-expression>&apos;0&apos;</default-expression>
       </column>
-      <column id="30" parent="3" name="tutor_id">
+      <column id="31" parent="3" name="tutor_id">
         <data-type>varchar(50)</data-type>
       </column>
-      <column id="31" parent="3" name="tags">
+      <column id="32" parent="3" name="tags">
         <data-type>varchar(50)</data-type>
       </column>
-      <column id="32" parent="3" name="excersice_url">
+      <column id="33" parent="3" name="excersice_url">
         <data-type>varchar(45)</data-type>
       </column>
-      <column id="33" parent="3" name="rating">
+      <column id="34" parent="3" name="rating">
         <data-type>int(11)</data-type>
         <default-expression>&apos;0&apos;</default-expression>
       </column>
-      <column id="34" parent="3" name="is_verified">
+      <column id="35" parent="3" name="is_verified">
         <data-type>tinyint(1)</data-type>
         <default-expression>&apos;0&apos;</default-expression>
       </column>
-      <index id="35" parent="3" name="Tutor_FK_idx">
+      <index id="36" parent="3" name="Tutor_FK_idx">
         <columns>tutor_id</columns>
         <desc-columns></desc-columns>
       </index>
-      <key id="36" parent="3" name="PRIMARY">
+      <key id="37" parent="3" name="PRIMARY">
         <columns>course_id</columns>
         <primary>1</primary>
       </key>
-      <foreign-key id="37" parent="3" name="Tutor_FK">
+      <foreign-key id="38" parent="3" name="Tutor_FK">
         <columns>tutor_id</columns>
         <ref-key>~.tutors.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <trigger id="38" parent="3" name="courses_BEFORE_DELETE"/>
-      <column id="39" parent="4" name="question_id">
+      <trigger id="39" parent="3" name="courses_BEFORE_DELETE"/>
+      <column id="40" parent="4" name="question_id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="40" parent="4" name="data">
+      <column id="41" parent="4" name="data">
         <mandatory>1</mandatory>
         <data-type>varchar(200)</data-type>
       </column>
-      <column id="41" parent="4" name="video_id">
+      <column id="42" parent="4" name="video_id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="42" parent="4" name="username">
+      <column id="43" parent="4" name="username">
         <mandatory>1</mandatory>
         <data-type>varchar(50)</data-type>
       </column>
-      <index id="43" parent="4" name="user_question_FK_idx">
+      <index id="44" parent="4" name="user_question_FK_idx">
         <columns>username</columns>
         <desc-columns></desc-columns>
       </index>
-      <index id="44" parent="4" name="video_question_FK_idx">
+      <index id="45" parent="4" name="video_question_FK_idx">
         <columns>video_id</columns>
         <desc-columns></desc-columns>
       </index>
-      <key id="45" parent="4" name="PRIMARY">
+      <key id="46" parent="4" name="PRIMARY">
         <columns>question_id</columns>
         <primary>1</primary>
       </key>
-      <foreign-key id="46" parent="4" name="user_question_FK">
+      <foreign-key id="47" parent="4" name="user_question_FK">
         <columns>username</columns>
         <ref-key>~.users.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="47" parent="4" name="video_question_FK">
+      <foreign-key id="48" parent="4" name="video_question_FK">
         <columns>video_id</columns>
         <ref-key>~.videos.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <trigger id="48" parent="4" name="questions_BEFORE_DELETE"/>
-      <column id="49" parent="5" name="reviews_id">
+      <trigger id="49" parent="4" name="questions_BEFORE_DELETE"/>
+      <column id="50" parent="5" name="reviews_id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="50" parent="5" name="data">
+      <column id="51" parent="5" name="data">
         <mandatory>1</mandatory>
         <data-type>varchar(300)</data-type>
       </column>
-      <column id="51" parent="5" name="course_id">
+      <column id="52" parent="5" name="course_id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="52" parent="5" name="username">
+      <column id="53" parent="5" name="username">
         <mandatory>1</mandatory>
         <data-type>varchar(50)</data-type>
       </column>
-      <column id="53" parent="5" name="rating">
+      <column id="54" parent="5" name="rating">
         <data-type>int(11)</data-type>
       </column>
-      <index id="54" parent="5" name="course_comment_FK_idx">
+      <index id="55" parent="5" name="course_comment_FK_idx">
         <columns>course_id</columns>
         <desc-columns></desc-columns>
       </index>
-      <index id="55" parent="5" name="user_comment_FK_idx">
+      <index id="56" parent="5" name="user_comment_FK_idx">
         <columns>username</columns>
         <desc-columns></desc-columns>
       </index>
-      <key id="56" parent="5" name="PRIMARY">
+      <key id="57" parent="5" name="PRIMARY">
         <columns>reviews_id</columns>
         <primary>1</primary>
       </key>
-      <foreign-key id="57" parent="5" name="course_comment_FK">
+      <foreign-key id="58" parent="5" name="course_comment_FK">
         <columns>course_id</columns>
         <ref-key>~.courses.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="58" parent="5" name="user_comment_FK">
+      <foreign-key id="59" parent="5" name="user_comment_FK">
         <columns>username</columns>
         <ref-key>~.users.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <column id="59" parent="6" name="tutor_id">
+      <column id="60" parent="6" name="tutor_id">
         <mandatory>1</mandatory>
         <data-type>varchar(50)</data-type>
       </column>
-      <column id="60" parent="6" name="email">
+      <column id="61" parent="6" name="email">
         <mandatory>1</mandatory>
         <data-type>varchar(45)</data-type>
       </column>
-      <column id="61" parent="6" name="password">
+      <column id="62" parent="6" name="password">
         <mandatory>1</mandatory>
         <data-type>varchar(45)</data-type>
       </column>
-      <column id="62" parent="6" name="name">
+      <column id="63" parent="6" name="name">
         <mandatory>1</mandatory>
         <data-type>varchar(45)</data-type>
       </column>
-      <column id="63" parent="6" name="description">
+      <column id="64" parent="6" name="description">
         <data-type>varchar(300)</data-type>
       </column>
-      <column id="64" parent="6" name="address">
+      <column id="65" parent="6" name="address">
         <data-type>varchar(150)</data-type>
       </column>
-      <index id="65" parent="6" name="email_UNIQUE">
+      <index id="66" parent="6" name="email_UNIQUE">
         <columns>email</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>
       </index>
-      <index id="66" parent="6" name="tutor_id_UNIQUE">
+      <index id="67" parent="6" name="tutor_id_UNIQUE">
         <columns>tutor_id</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>
       </index>
-      <key id="67" parent="6" name="email_UNIQUE">
+      <key id="68" parent="6" name="email_UNIQUE">
         <columns>email</columns>
         <underlying-index>email_UNIQUE</underlying-index>
       </key>
-      <key id="68" parent="6" name="PRIMARY">
+      <key id="69" parent="6" name="PRIMARY">
         <columns>tutor_id</columns>
         <primary>1</primary>
       </key>
-      <key id="69" parent="6" name="tutor_id_UNIQUE">
+      <key id="70" parent="6" name="tutor_id_UNIQUE">
         <columns>tutor_id</columns>
         <underlying-index>tutor_id_UNIQUE</underlying-index>
       </key>
-      <trigger id="70" parent="6" name="Tutors_BEFORE_DELETE"/>
-      <column id="71" parent="7" name="username">
-        <mandatory>1</mandatory>
-        <data-type>varchar(50)</data-type>
-      </column>
-      <column id="72" parent="7" name="course_id">
+      <trigger id="71" parent="6" name="Tutors_BEFORE_DELETE"/>
+      <column id="72" parent="7" name="id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="73" parent="7" name="lecture_completed">
+      <column id="73" parent="7" name="username">
+        <mandatory>1</mandatory>
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="74" parent="7" name="course_id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="75" parent="7" name="lecture_completed">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
         <default-expression>&apos;0&apos;</default-expression>
       </column>
-      <column id="74" parent="7" name="registered_date">
+      <column id="76" parent="7" name="registered_date">
         <mandatory>1</mandatory>
-        <data-type>datetime</data-type>
+        <data-type>date</data-type>
       </column>
-      <column id="75" parent="7" name="completion_date">
+      <column id="77" parent="7" name="completion_date">
         <mandatory>1</mandatory>
-        <data-type>datetime</data-type>
+        <data-type>date</data-type>
       </column>
-      <column id="76" parent="7" name="certification_id">
+      <column id="78" parent="7" name="certification_id">
         <data-type>varchar(45)</data-type>
       </column>
-      <index id="77" parent="7" name="Course_FK_idx">
+      <index id="79" parent="7" name="Course_FK_idx">
         <columns>course_id</columns>
         <desc-columns></desc-columns>
       </index>
-      <index id="78" parent="7" name="User_FK_idx">
+      <index id="80" parent="7" name="User_FK_idx">
         <columns>username</columns>
         <desc-columns></desc-columns>
       </index>
-      <foreign-key id="79" parent="7" name="Course_FK">
+      <key id="81" parent="7" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="82" parent="7" name="Course_FK">
         <columns>course_id</columns>
         <ref-key>~.courses.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="80" parent="7" name="User_FK">
+      <foreign-key id="83" parent="7" name="User_FK">
         <columns>username</columns>
         <ref-key>~.users.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <column id="81" parent="8" name="username">
+      <column id="84" parent="8" name="username">
         <mandatory>1</mandatory>
         <data-type>varchar(50)</data-type>
       </column>
-      <column id="82" parent="8" name="email">
+      <column id="85" parent="8" name="email">
         <mandatory>1</mandatory>
         <data-type>varchar(50)</data-type>
       </column>
-      <column id="83" parent="8" name="password">
+      <column id="86" parent="8" name="password">
         <mandatory>1</mandatory>
         <data-type>varchar(45)</data-type>
       </column>
-      <column id="84" parent="8" name="name">
+      <column id="87" parent="8" name="name">
         <mandatory>1</mandatory>
         <data-type>varchar(45)</data-type>
       </column>
-      <column id="85" parent="8" name="gender">
+      <column id="88" parent="8" name="gender">
         <mandatory>1</mandatory>
         <data-type>varchar(10)</data-type>
         <default-expression>&apos;Male&apos;</default-expression>
       </column>
-      <column id="86" parent="8" name="dob">
+      <column id="89" parent="8" name="dob">
         <data-type>date</data-type>
       </column>
-      <column id="87" parent="8" name="address">
+      <column id="90" parent="8" name="address">
         <data-type>varchar(150)</data-type>
       </column>
-      <column id="88" parent="8" name="mobileno">
+      <column id="91" parent="8" name="mobileno">
         <data-type>varchar(15)</data-type>
       </column>
-      <index id="89" parent="8" name="email_UNIQUE">
+      <index id="92" parent="8" name="email_UNIQUE">
         <columns>email</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>
       </index>
-      <index id="90" parent="8" name="username_UNIQUE">
+      <index id="93" parent="8" name="username_UNIQUE">
         <columns>username</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>
       </index>
-      <key id="91" parent="8" name="email_UNIQUE">
+      <key id="94" parent="8" name="email_UNIQUE">
         <columns>email</columns>
         <underlying-index>email_UNIQUE</underlying-index>
       </key>
-      <key id="92" parent="8" name="PRIMARY">
+      <key id="95" parent="8" name="PRIMARY">
         <columns>username</columns>
         <primary>1</primary>
       </key>
-      <key id="93" parent="8" name="username_UNIQUE">
+      <key id="96" parent="8" name="username_UNIQUE">
         <columns>username</columns>
         <underlying-index>username_UNIQUE</underlying-index>
       </key>
-      <trigger id="94" parent="8" name="Users_BEFORE_DELETE"/>
-      <column id="95" parent="9" name="video_id">
+      <trigger id="97" parent="8" name="Users_BEFORE_DELETE"/>
+      <column id="98" parent="9" name="video_id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="96" parent="9" name="course_id">
+      <column id="99" parent="9" name="course_id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
-      <column id="97" parent="9" name="video_url">
+      <column id="100" parent="9" name="video_url">
         <mandatory>1</mandatory>
         <data-type>varchar(45)</data-type>
       </column>
-      <column id="98" parent="9" name="description">
+      <column id="101" parent="9" name="description">
         <data-type>varchar(200)</data-type>
       </column>
-      <column id="99" parent="9" name="excercise_url">
+      <column id="102" parent="9" name="excercise_url">
         <data-type>varchar(45)</data-type>
       </column>
-      <index id="100" parent="9" name="course_id_FK_idx">
+      <index id="103" parent="9" name="course_id_FK_idx">
         <columns>course_id</columns>
         <desc-columns></desc-columns>
       </index>
-      <key id="101" parent="9" name="PRIMARY">
+      <key id="104" parent="9" name="PRIMARY">
         <columns>video_id</columns>
         <primary>1</primary>
       </key>
-      <foreign-key id="102" parent="9" name="course_id_FK">
+      <foreign-key id="105" parent="9" name="course_id_FK">
         <columns>course_id</columns>
         <ref-key>~.courses.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <trigger id="103" parent="9" name="videos_BEFORE_DELETE"/>
+      <trigger id="106" parent="9" name="videos_BEFORE_DELETE"/>
+      <column id="107" parent="10" name="id1">
+        <mandatory>1</mandatory>
+        <data-type>varchar(20)</data-type>
+      </column>
+      <column id="108" parent="10" name="id2">
+        <mandatory>1</mandatory>
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="109" parent="10" name="name">
+        <data-type>varchar(45)</data-type>
+      </column>
+      <column id="110" parent="10" name="desc">
+        <data-type>varchar(45)</data-type>
+      </column>
+      <key id="111" parent="10" name="PRIMARY">
+        <columns>id1
+id2</columns>
+        <primary>1</primary>
+      </key>
     </database-model>
   </data-source>
 </component>

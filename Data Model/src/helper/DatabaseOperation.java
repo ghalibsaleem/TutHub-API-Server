@@ -136,16 +136,16 @@ public class DatabaseOperation<T extends Object> {
         Session session = Helper.sessionFactory.openSession();
         Query query = null;
         if(Answer.class == type){
-            return session.createQuery("from Answer where answerId = :param").setParameter("param",id);
+            return session.createQuery("from Answer where answerId = :param").setParameter("param",Integer.parseInt(id));
         }
         if(Course.class == type){
-            return session.createQuery("from Course where courseId = :param").setParameter("param",id);
+            return session.createQuery("from Course where courseId = :param").setParameter("param",Integer.parseInt(id));
         }
         if(Question.class == type){
-            return session.createQuery("from Question where questionId = :param").setParameter("param",id);
+            return session.createQuery("from Question where questionId = :param").setParameter("param",Integer.parseInt(id));
         }
         if(Review.class == type){
-            return session.createQuery("from Review where reviewsId = :param").setParameter("param",id);
+            return session.createQuery("from Review where reviewsId = :param").setParameter("param",Integer.parseInt(id));
         }
         if(Tutor.class == type){
             return session.createQuery("from Tutor where tutorId = :param").setParameter("param",id);
@@ -154,7 +154,7 @@ public class DatabaseOperation<T extends Object> {
             return session.createQuery("from User where username = :param").setParameter("param",id);
         }
         if(Video.class == type){
-            return session.createQuery("from Video where videoId = :param").setParameter("param",id);
+            return session.createQuery("from Video where videoId = :param").setParameter("param",Integer.parseInt(id));
         }
         return null;
     }

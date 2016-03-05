@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class TutorOperations {
 
-    private boolean tutorLogin(String username, String password) {
+    public boolean tutorLogin(String username, String password) {
         if (Helper.sessionFactory == null)
             Helper.init();
         Session session = Helper.sessionFactory.openSession();

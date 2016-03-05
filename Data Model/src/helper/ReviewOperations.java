@@ -1,5 +1,6 @@
 package helper;
 
+import entities.Course;
 import entities.Review;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -15,9 +16,10 @@ public class ReviewOperations {
             Helper.init();
         Session session = Helper.sessionFactory.openSession();
         try {
-            Query query = session.createQuery("from Review where courseId = :courseId");
+            Query query = session.createQuery("from Course where courseId = :courseId");
             query.setParameter("courseId",courseId);
-            return query.list();
+            Course course = (Course) query.uniqueResult();
+            return course.getReviews();
         }catch (Exception e){
 
         }

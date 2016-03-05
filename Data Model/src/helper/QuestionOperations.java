@@ -1,6 +1,7 @@
 package helper;
 
 import entities.Question;
+import entities.Video;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -15,9 +16,10 @@ public class QuestionOperations {
             Helper.init();
         Session session = Helper.sessionFactory.openSession();
         try {
-            Query query = session.createQuery("from Question where videoId = :videoId");
+            Query query = session.createQuery("from Video where videoId = :videoId");
             query.setParameter("videoId",videoId);
-            return query.list();
+            Video video = (Video) query.uniqueResult();
+            return video.getQuestions();
         }catch (Exception e){
 
         }

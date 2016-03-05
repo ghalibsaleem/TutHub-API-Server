@@ -28,6 +28,7 @@ public class UserResource {
      */
 
     @POST
+    @Path("login")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public User login(@FormParam("username") String username, @FormParam("password") String password){
         UserOperation userOperation = new UserOperation();
