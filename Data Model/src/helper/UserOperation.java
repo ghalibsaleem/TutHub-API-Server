@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class UserOperation {
 
-    private boolean userLogin(String username, String password) {
+    public boolean userLogin(String username, String password) {
         if (Helper.sessionFactory == null)
             Helper.init();
         Session session = Helper.sessionFactory.openSession();

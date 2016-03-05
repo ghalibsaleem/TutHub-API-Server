@@ -84,6 +84,39 @@ public class CourseOperations {
         return null;
     }
 
+    public Course getById(String id){
+        if (Helper.sessionFactory == null)
+            Helper.init();
+        Session session = Helper.sessionFactory.openSession();
+        try {
+            session.beginTransaction();
+            return (Course) session.get(Course.class,id);
+        }catch (Exception e){
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }finally {
+            if (session!=null && session.isOpen())
+                session.close();
+        }
+        return null;
+    }
+
+    public List<Course> getByName(String subString){
+        if (Helper.sessionFactory == null)
+            Helper.init();
+        Session session = Helper.sessionFactory.openSession();
+        try {
+            Query query = session.createQuery("from Course where name like :param").setParameter("param","%"+subString+"%");
+            return query.list();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            if (session!=null && session.isOpen())
+                session.close();
+        }
+        return null;
+    }
+
     public List<Course> getCoursesByTutor(String tutor_id){
         if (Helper.sessionFactory == null)
             Helper.init();
