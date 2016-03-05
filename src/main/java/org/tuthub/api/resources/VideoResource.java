@@ -73,7 +73,7 @@ public class VideoResource {
         }
     }
 
-    @Path("/question")
+    @Path("{videoId}/questions")
     public QuestionResource getQuestion(){
         return new QuestionResource();
     }

@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Created by ghalib on 3/3/2016.
+ *
  */
 public class QuestionOperations {
     public List<Question> getQuestionByVideo(String videoId){
@@ -21,9 +22,26 @@ public class QuestionOperations {
             Video video = (Video) query.uniqueResult();
             return video.getQuestions();
         }catch (Exception e){
-
+            e.printStackTrace();
         }
         finally {
+            if (session!=null && session.isOpen())
+                session.close();
+        }
+        return null;
+    }
+    public Question addQuestion(Question question){
+        if (Helper.sessionFactory == null)
+            Helper.init();
+        Session session = Helper.sessionFactory.openSession();
+        try{
+            session.beginTransaction();
+            session.save(question);
+            session.getTransaction().commit();
+        }catch (Exception e){
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }finally {
             if (session!=null && session.isOpen())
                 session.close();
         }
