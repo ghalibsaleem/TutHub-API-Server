@@ -1,9 +1,14 @@
 package org.tuthub.api.resources;
 
 import entities.Course;
+import helper.CourseOperations;
+import helper.DatabaseOperation;
+import org.tuthub.api.authorizationmodel.AuthCourse;
+import org.tuthub.api.filterbeans.CourseFilterBean;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 /**
  * Created by ghalib on 2/26/2016.
@@ -15,51 +20,70 @@ public class CourseResource {
 
     @GET
     @Path("/{courseid}")
-    public Course getCourse(@PathParam("courseid") String courseid){
-        // TODO: 2/27/2016
+    public Course getCourse(@PathParam("courseid") String courseid,@BeanParam CourseFilterBean courseFilterBean){
+        if (courseFilterBean != null && (courseFilterBean.getTutorId() != null
+                || courseFilterBean.getUsername()!= null
+                || courseFilterBean.getUriInfo().getPath().contains("courses"))){
+            DatabaseOperation<Course> databaseOperation = new DatabaseOperation<Course>(Course.class);
+            return databaseOperation.getbyID(courseid);
+        }
         return null;
     }
 
     @GET
-    public Course getCourseByUserOrTuror(
-            @PathParam("userId") String username,
+    public List<Course> getCourseByUserOrTuror(
+            @PathParam("username") String username,
             @PathParam("tutorId") String tutorId){
         if (username != null){
-
+            CourseOperations courseOperations = new CourseOperations();
+            return courseOperations.getCoursesByUser(username);
         }else if (tutorId != null){
-
+            CourseOperations courseOperations = new CourseOperations();
+            return courseOperations.getCoursesByTutor(tutorId);
         }
-        // TODO: 2/27/2016
         return null;
     }
 
+    @GET
+    @Path("courses/search/{queryString}")
+    public List<Course> getCourseBySearch(@PathParam("queryString") String queryString){
+        DatabaseOperation<Course> databaseOperation = new DatabaseOperation<Course>(Course.class);
+        return databaseOperation.getByName(queryString);
+    }
+
     @POST
-    public Course updateCourse(Course course)
+    public Course updateCourse(AuthCourse authCourse, @BeanParam CourseFilterBean courseFilterBean)
     {
-        // TODO: 2/27/2016
+        if (courseFilterBean != null && courseFilterBean.getTutorId() != null){
+            CourseOperations courseOperations = new CourseOperations();
+            return courseOperations.updateCourse(authCourse.getCourse(),authCourse.getTutor());
+        }
         return null;
     }
 
     @PUT
-    public Course addCourse(Course course){
-        // TODO: 2/27/2016
+    public Course addCourse(AuthCourse authCourse,@BeanParam CourseFilterBean courseFilterBean){
+        if (courseFilterBean != null && courseFilterBean.getTutorId() != null){
+            CourseOperations courseOperations = new CourseOperations();
+            return courseOperations.addCourse(authCourse.getCourse(),authCourse.getTutor());
+        }
         return null;
     }
 
     @DELETE
-    public  void deleteCourse(Course course){
-
-        // TODO: 2/27/2016
+    public  void deleteCourse(AuthCourse authCourse,@BeanParam CourseFilterBean courseFilterBean){
+        if (courseFilterBean != null && courseFilterBean.getTutorId() != null){
+            CourseOperations courseOperations = new CourseOperations();
+            courseOperations.deleteCourse(authCourse.getCourse(),authCourse.getTutor());
+        }
     }
 
-    @GET
-    @Path("{courseid}/videos")
+    @Path("{courseId}/videos")
     public VideoResource getVideos(){
         return new VideoResource();
     }
 
-    @GET
-    @Path("{courseid}/reviews")
+    @Path("{courseId}/reviews")
     public ReviewResource getReviews(){
         return new ReviewResource();
     }
