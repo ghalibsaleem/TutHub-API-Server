@@ -78,7 +78,6 @@ public class UserResource {
 
     @Path("{username}/courses")
     public CourseResource getCourse(){
-        // FIXME: 3/5/2016 
         return new CourseResource();
     }
 }

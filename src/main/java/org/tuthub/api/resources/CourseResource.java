@@ -2,7 +2,6 @@ package org.tuthub.api.resources;
 
 import entities.Course;
 import helper.CourseOperations;
-import helper.DatabaseOperation;
 import org.tuthub.api.authorizationmodel.AuthCourse;
 import org.tuthub.api.filterbeans.CourseFilterBean;
 
@@ -24,8 +23,8 @@ public class CourseResource {
         if (courseFilterBean != null && (courseFilterBean.getTutorId() != null
                 || courseFilterBean.getUsername()!= null
                 || courseFilterBean.getUriInfo().getPath().contains("courses"))){
-            DatabaseOperation<Course> databaseOperation = new DatabaseOperation<Course>(Course.class);
-            return databaseOperation.getbyID(courseid);
+            CourseOperations courseOperations = new CourseOperations();
+            return courseOperations.getById(courseid);
         }
         return null;
     }
@@ -47,8 +46,8 @@ public class CourseResource {
     @GET
     @Path("courses/search/{queryString}")
     public List<Course> getCourseBySearch(@PathParam("queryString") String queryString){
-        DatabaseOperation<Course> databaseOperation = new DatabaseOperation<Course>(Course.class);
-        return databaseOperation.getByName(queryString);
+        CourseOperations courseOperations = new CourseOperations();
+        return courseOperations.getByName(queryString);
     }
 
     @POST

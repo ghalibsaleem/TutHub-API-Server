@@ -2,7 +2,6 @@ package org.tuthub.api.resources;
 
 import entities.Tutor;
 import entities.restricted.RestrictedTutor;
-import helper.DatabaseOperation;
 import helper.TutorOperations;
 
 import javax.ws.rs.*;
