@@ -5,7 +5,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 
 /**
- * Created by ghali on 3/4/2016.
+ * Created by ghalib on 3/4/2016.
+ *
  */
 public class CourseFilterBean {
     @PathParam("userId")

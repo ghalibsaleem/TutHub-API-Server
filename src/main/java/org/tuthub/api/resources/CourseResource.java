@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * Created by ghalib on 2/26/2016.
+ *
  */
 @Path("/{a:courses|}")
 @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})

@@ -6,7 +6,8 @@ import javax.xml.bind.annotation.XmlTransient;
 import java.util.List;
 
 /**
- * Created by ghali on 3/5/2016.
+ * Created by ghalib on 3/5/2016.
+ *
  */
 @XmlRootElement
 @Entity
@@ -16,6 +17,7 @@ public class Question {
     private String data;
     private List<Answer> answers;
     private Video video;
+    private String username;
 
     @Id
     @Column(name = "question_id")
@@ -46,7 +48,7 @@ public class Question {
 
         if (questionId != question.questionId) return false;
         if (data != null ? !data.equals(question.data) : question.data != null) return false;
-
+        if (username != null ? !username.equals(question.username) : question.username != null) return false;
         return true;
     }
 
@@ -54,6 +56,7 @@ public class Question {
     public int hashCode() {
         int result = questionId;
         result = 31 * result + (data != null ? data.hashCode() : 0);
+        result = 31 * result + (username != null ? username.hashCode() : 0);
         return result;
     }
 
@@ -76,5 +79,15 @@ public class Question {
 
     public void setVideo(Video video) {
         this.video = video;
+    }
+
+    @Basic
+    @Column(name = "username")
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

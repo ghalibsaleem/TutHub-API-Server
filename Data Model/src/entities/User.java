@@ -10,7 +10,8 @@ import java.sql.Date;
 import java.util.List;
 
 /**
- * Created by ghali on 3/5/2016.
+ * Created by ghalib on 3/5/2016.
+ *
  */
 @XmlRootElement
 @Entity

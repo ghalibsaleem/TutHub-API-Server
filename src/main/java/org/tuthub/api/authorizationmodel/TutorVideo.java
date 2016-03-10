@@ -5,6 +5,7 @@ import entities.Video;
 
 /**
  * Created by ghalib on 3/5/2016.
+ *
  */
 public class TutorVideo {
     private Tutor tutor;

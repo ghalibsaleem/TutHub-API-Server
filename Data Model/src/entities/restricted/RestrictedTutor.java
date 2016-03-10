@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Created by ghalib on 3/3/2016.
+ *
  */
 @XmlRootElement(name = "Tutor")
 public class RestrictedTutor {

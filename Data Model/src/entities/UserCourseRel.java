@@ -4,7 +4,8 @@ import javax.persistence.*;
 import java.sql.Date;
 
 /**
- * Created by ghali on 3/5/2016.
+ * Created by ghalib on 3/5/2016.
+ *
  */
 @Entity
 @Table(name = "user_course_rel", schema = "tut_hub_server_db", catalog = "")
@@ -80,10 +81,8 @@ public class UserCourseRel {
             return false;
         if (completionDate != null ? !completionDate.equals(that.completionDate) : that.completionDate != null)
             return false;
-        if (certificationId != null ? !certificationId.equals(that.certificationId) : that.certificationId != null)
-            return false;
+        return certificationId != null ? certificationId.equals(that.certificationId) : that.certificationId == null;
 
-        return true;
     }
 
     @Override

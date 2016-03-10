@@ -6,7 +6,8 @@ import entities.User;
 import helper.UserOperation;
 
 /**
- * Created by ghali on 2/24/2016.
+ * Created by ghalib on 2/24/2016.
+ *
  */
 
 public class UserServices {

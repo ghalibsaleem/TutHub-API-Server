@@ -7,6 +7,7 @@ import java.util.Date;
 
 /**
  * Created by ghalib on 3/3/2016.
+ *
  */
 
 @XmlRootElement(name = "User")

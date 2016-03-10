@@ -9,7 +9,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.List;
 
 /**
- * Created by ghali on 3/5/2016.
+ * Created by ghalib on 3/5/2016.
+ *
  */
 @XmlRootElement
 @Entity

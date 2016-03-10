@@ -7,6 +7,7 @@ import org.hibernate.service.ServiceRegistryBuilder;
 
 /**
  * Created by ghalib on 3/2/2016.
+ *
  */
 public class Helper {
     protected static SessionFactory sessionFactory = null;

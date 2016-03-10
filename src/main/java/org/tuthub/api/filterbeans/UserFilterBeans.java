@@ -4,6 +4,7 @@ import javax.ws.rs.QueryParam;
 
 /**
  * Created by ghalib on 2/25/2016.
+ *
  */
 public class UserFilterBeans {
     @QueryParam("username") String username;
