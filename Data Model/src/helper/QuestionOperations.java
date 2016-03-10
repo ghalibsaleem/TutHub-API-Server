@@ -38,6 +38,7 @@ public class QuestionOperations {
             session.beginTransaction();
             session.save(question);
             session.getTransaction().commit();
+            return question;
         }catch (Exception e){
             session.getTransaction().rollback();
             e.printStackTrace();

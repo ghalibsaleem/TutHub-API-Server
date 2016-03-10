@@ -30,4 +30,23 @@ public class AnswerOperations {
         }
         return null;
     }
+
+    public Answer addAnswer(Answer answer){
+        if (Helper.sessionFactory == null)
+            Helper.init();
+        Session session = Helper.sessionFactory.openSession();
+        try{
+            session.beginTransaction();
+            session.save(answer);
+            session.getTransaction().commit();
+            return answer;
+        }catch (Exception e){
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }finally {
+            if (session!=null && session.isOpen())
+                session.close();
+        }
+        return null;
+    }
 }

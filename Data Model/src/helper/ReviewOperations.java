@@ -12,7 +12,7 @@ import java.util.List;
  *
  */
 public class ReviewOperations {
-    public List<Review> getQuestionByVideo(String courseId){
+    public List<Review> getReviewByCourse(String courseId){
         if (Helper.sessionFactory == null)
             Helper.init();
         Session session = Helper.sessionFactory.openSession();
@@ -25,6 +25,25 @@ public class ReviewOperations {
 
         }
         finally {
+            if (session!=null && session.isOpen())
+                session.close();
+        }
+        return null;
+    }
+
+    public Review addReview(Review review){
+        if (Helper.sessionFactory == null)
+            Helper.init();
+        Session session = Helper.sessionFactory.openSession();
+        try{
+            session.beginTransaction();
+            session.save(review);
+            session.getTransaction().commit();
+            return review;
+        }catch (Exception e){
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }finally {
             if (session!=null && session.isOpen())
                 session.close();
         }
